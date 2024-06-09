@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GreenAlert
 
-## Getting Started
+Mapeo de problemas ambientales en Argentina
 
-First, run the development server:
+## Primeros pasos de desarrollo
+
+Primero, instala las dependencias del proyecto:
+
+```bash
+npm install
+# o
+yarn install
+# o
+pnpm install
+# o
+bun install
+```
+
+Luego, ejecuta el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
+# o
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Descripción del proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Este proyecto utiliza varias tecnologías modernas para crear una aplicación web robusta y escalable. A continuación se describen las principales herramientas y bibliotecas utilizadas:
 
-## Learn More
+-   **ReactJS**: Una biblioteca de JavaScript para construir interfaces de usuario. React permite crear componentes reutilizables y gestionar el estado de la aplicación de manera eficiente.
+-   **NextJS**: Un framework de React para aplicaciones web estáticas y dinámicas. NextJS proporciona funcionalidades como el renderizado del lado del servidor (SSR) y la generación de sitios estáticos (SSG), además de una configuración optimizada para el rendimiento.
+-   **shadcn/ui**: Una biblioteca de componentes de interfaz de usuario (UI) que facilita la construcción de interfaces atractivas y coherentes.
+-   **TailwindCSS**: Un framework de CSS utilitario para crear diseños personalizados sin tener que escribir CSS desde cero. TailwindCSS proporciona clases predefinidas que se pueden combinar para diseñar cualquier componente de forma rápida.
+-   **ESLint**: Una herramienta de análisis estático para identificar y solucionar problemas en el código JavaScript y TypeScript. ESLint ayuda a mantener un código limpio y consistente.
+-   **TypeScript**: Un superset de JavaScript que añade tipos estáticos. TypeScript ayuda a detectar errores durante el desarrollo y mejora la mantenibilidad del código.
 
-To learn more about Next.js, take a look at the following resources:
+Estas tecnologías combinadas permiten desarrollar una aplicación moderna, con buenas prácticas de desarrollo y una excelente experiencia de usuario.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
