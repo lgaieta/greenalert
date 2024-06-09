@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import Header from '@/components/header'
 
 const fontSans = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -24,6 +25,7 @@ export default function RootLayout({
                     fontSans.variable
                 )}
             >
+                <Header />
                 {children}
             </body>
         </html>
