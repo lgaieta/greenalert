@@ -15,7 +15,7 @@ export function RegisterForm() {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                     id='email'
-                    placeholder='m@example.com'
+                    placeholder='ejemplo@greenalert.com'
                     required
                     type='email'
                 />
@@ -26,6 +26,7 @@ export function RegisterForm() {
                     id='password'
                     placeholder='••••••••'
                     required
+                    minLength={6}
                     type='password'
                 />
             </div>
