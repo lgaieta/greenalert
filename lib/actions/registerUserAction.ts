@@ -8,7 +8,7 @@ export async function registerUserAction(
     previousState: RegisterFormErrors,
     formData: FormData
 ) {
-    const { email = '', password = '' } = Object.fromEntries(formData.entries())
+    const { email, password } = Object.fromEntries(formData.entries())
 
     if (!email || !password || email instanceof File || password instanceof File) {
         return ['Debe completar todos los campos.']
