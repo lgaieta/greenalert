@@ -1,8 +1,8 @@
 'use server'
 
 import { RegisterFormErrors } from '@/components/register-form'
-import { registerUserInRepository } from '../services/registerUserInRepository'
 import { RequestError } from '../utils'
+import UserRepository from '../services/UserRepository'
 
 export async function registerUserAction(
     previousState: RegisterFormErrors,
@@ -17,7 +17,7 @@ export async function registerUserAction(
     const newUser = { email, password }
 
     try {
-        await registerUserInRepository(newUser)
+        await UserRepository.register(newUser)
     } catch (error) {
         console.error(error)
 
