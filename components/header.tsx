@@ -24,7 +24,7 @@ export default function Header() {
                         size={'sm'}
                     >
                         <Link
-                            href='#'
+                            href='/iniciar-sesion'
                             className='rounded-md px-4 py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2'
                         >
                             Iniciar sesión
