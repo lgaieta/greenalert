@@ -3,6 +3,7 @@
 import { LoginFormErrors } from '@/components/login-form'
 import { RequestError } from '../utils'
 import UserRepository from '../services/UserRepository'
+import { cookies } from 'next/headers'
 
 export async function loginUserAction(
     previousState: LoginFormErrors,
@@ -17,7 +18,16 @@ export async function loginUserAction(
     const user = { email, password }
 
     try {
-        await UserRepository.login(user)
+        const response = await UserRepository.login(user)
+        const setCookieHeader = response.headers.getSetCookie()
+        if (setCookieHeader) {
+            setCookieHeader.forEach(cookie => {
+                const [cookieName, ...cookieAttributes] = cookie.split('=')
+                cookies().set(cookieName, cookieAttributes.join('='), {
+                    httpOnly: true
+                })
+            })
+        }
     } catch (error) {
         console.error(error)
 

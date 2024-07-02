@@ -3,7 +3,7 @@ import { RequestError } from '../utils'
 
 class UserRepository {
     static async register(newUser: NewUser) {
-        const res = await fetch('mockurl.com/register', {
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,16 +19,19 @@ class UserRepository {
     }
 
     static async login(newUser: NewUser) {
-        const res = await fetch('mockurl.com/login', {
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(newUser)
         })
 
         if (!res.ok)
             throw new RequestError('Error al iniciar sesion (http request).', res.status)
+
+        return res
     }
 }
 
