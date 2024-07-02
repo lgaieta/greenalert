@@ -4,6 +4,7 @@ import { LoginFormErrors } from '@/components/login-form'
 import { RequestError } from '../utils'
 import UserRepository from '../services/UserRepository'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export async function loginUserAction(
     previousState: LoginFormErrors,
@@ -44,5 +45,5 @@ export async function loginUserAction(
         return ['Error al iniciar sesión.']
     }
 
-    return []
+    redirect('/')
 }
