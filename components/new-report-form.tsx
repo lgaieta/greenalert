@@ -35,6 +35,7 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { ResponsiveLine } from '@nivo/line'
+import { JSX, ClassAttributes, HTMLAttributes } from 'react'
 
 export function NewReportForm() {
     return (
@@ -98,7 +99,11 @@ export function NewReportForm() {
     )
 }
 
-function LineChart(props) {
+function LineChart(
+    props: JSX.IntrinsicAttributes &
+        ClassAttributes<HTMLDivElement> &
+        HTMLAttributes<HTMLDivElement>
+) {
     return (
         <div {...props}>
             <ResponsiveLine
