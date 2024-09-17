@@ -4,6 +4,8 @@ import './globals.css'
 import { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import Header from '@/components/header'
+import { ThemeProvider } from '@/components/theme-provider'
+import { LeafletProvider } from '@/components/leaflet-provider'
 
 const fontSans = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -19,14 +21,19 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='es'>
-            <body
-                className={cn(
-                    'min-h-screen bg-background font-sans antialiased',
-                    fontSans.variable
-                )}
-            >
-                <Header />
-                {children}
+            <body className={cn(fontSans.variable)}>
+                <ThemeProvider
+                    attribute='class'
+                    defaultTheme='system'
+                    enableSystem
+                >
+                    <LeafletProvider>
+                        <div className='min-h-screen bg-background font-sans antialiased'>
+                            <Header />
+                            {children}
+                        </div>
+                    </LeafletProvider>
+                </ThemeProvider>
             </body>
         </html>
     )
