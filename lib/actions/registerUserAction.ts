@@ -27,7 +27,7 @@ export async function registerUserAction(
             }
 
             if (error.code === 400) {
-                return ['Ya existe un usuario con ese email.']
+                return ['Ocurrio un error.']
             }
         }
 
