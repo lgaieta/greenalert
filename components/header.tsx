@@ -5,12 +5,37 @@ export default function Header() {
     return (
         <header className='w-full py-3 border-b border-b-border/40'>
             <div className='container flex items-center justify-between'>
-                <Link
-                    href='/'
-                    className='text-base font-bold'
-                >
-                    GreenAlert
-                </Link>
+                <div className='flex gap-6 items-center'>
+                    <Link
+                        href='/'
+                        className='text-base font-bold'
+                    >
+                        GreenAlert
+                    </Link>
+                    <div className='flex gap-2 items-center'>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/nuevo-problema'>Nuevo problema</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/directores/nuevo'>Nuevo director</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/escuelas/crear'>Nueva escuela</Link>
+                        </Button>
+                    </div>
+                </div>
                 <nav className='flex items-center space-x-4'>
                     <Button
                         asChild
