@@ -5,6 +5,9 @@ class SchoolRepository {
     static async save(school: School) {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/school`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(school)
         })
 
