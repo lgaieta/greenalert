@@ -3,11 +3,15 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { registerSchoolAction } from '@/lib/actions/registerSchoolAction'
 import { useFormStatus } from 'react-dom'
 
 function NewSchoolForm() {
     return (
-        <form className='flex flex-col gap-8 items-center w-full'>
+        <form
+            className='flex flex-col gap-8 items-center w-full'
+            action={registerSchoolAction}
+        >
             <div className='max-w-sm flex flex-col gap-2 w-full'>
                 <Label htmlFor='cue'>CUE</Label>
                 <Input
@@ -39,7 +43,7 @@ function SubmitButton() {
             type='submit'
             disabled={pending}
         >
-            Crear escuela
+            {pending ? 'Creando...' : 'Crear escuela'}
         </Button>
     )
 }
