@@ -14,9 +14,12 @@ class SessionManager {
     }
 
     static async validateSession() {
-        const { authorized } = await UserRepository.validateSession()
+        const result = await UserRepository.validateSession()
+        const { authorized } = result
 
-        return { authorized }
+        if (!authorized) return { authorized }
+
+        return { authorized, usertype: result.usertype }
     }
 }
 

@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 export default function DefaultHeader() {
     return (
         <header className='w-full py-3 border-b border-b-border/40'>
-            <div className='container flex items-center justify-between'>
+            <nav className='container flex items-center justify-between'>
                 <div className='flex gap-6 items-center'>
                     <Link
                         href='/'
@@ -18,11 +18,11 @@ export default function DefaultHeader() {
                             variant={'link'}
                             size={'sm'}
                         >
-                            <Link href='/nuevo-problema'>Problemas</Link>
+                            <Link href='/mapa'>Mapa</Link>
                         </Button>
                     </div>
                 </div>
-                <nav className='flex items-center space-x-4'>
+                <div className='flex items-center space-x-4'>
                     <Button
                         asChild
                         variant={'outline'}
@@ -41,8 +41,8 @@ export default function DefaultHeader() {
                             Iniciar sesión
                         </Link>
                     </Button>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </header>
     )
 }
