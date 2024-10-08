@@ -3,6 +3,8 @@
 import { RegisterFormErrors } from '@/components/register-form'
 import { RequestError } from '../utils'
 import UserRepository from '../services/UserRepository'
+import SessionManager from '@/lib/services/SessionManager'
+import { redirect } from 'next/navigation'
 
 export async function registerUserAction(
     previousState: RegisterFormErrors,
@@ -18,6 +20,8 @@ export async function registerUserAction(
 
     try {
         await UserRepository.register(newUser)
+        const response = await UserRepository.login(newUser)
+        SessionManager.setSessionFromSetCookie(response.headers.getSetCookie())
     } catch (error) {
         console.error(error)
 
@@ -34,5 +38,5 @@ export async function registerUserAction(
         return ['Error al registrar el usuario.']
     }
 
-    return []
+    redirect('/')
 }
