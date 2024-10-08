@@ -32,7 +32,21 @@ export default function Header() {
                             variant={'link'}
                             size={'sm'}
                         >
+                            <Link href='/directores'>Directores</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
                             <Link href='/escuelas/crear'>Nueva escuela</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/escuelas'>Escuelas</Link>
                         </Button>
                     </div>
                 </div>

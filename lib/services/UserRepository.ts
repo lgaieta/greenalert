@@ -38,6 +38,14 @@ class UserRepository {
             )
     }
 
+    static async listDirectors(): Promise<User[]> {
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/user/director`)
+
+        if (!res.ok) throw new RequestError('Error al listar los directores', res.status)
+
+        return await res.json()
+    }
+
     static async login(newUser: NewUser) {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/user/login`, {
             method: 'POST',

@@ -21,6 +21,14 @@ function NewSchoolForm() {
                 />
             </div>
             <div className='max-w-sm flex flex-col gap-2 w-full'>
+                <Label htmlFor='name'>Nombre</Label>
+                <Input
+                    id='name'
+                    name='name'
+                    required
+                />
+            </div>
+            <div className='max-w-sm flex flex-col gap-2 w-full'>
                 <Label htmlFor='locality'>Localidad</Label>
                 <Input
                     id='locality'

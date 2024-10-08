@@ -4,13 +4,20 @@ import SchoolRepository from '@/lib/services/SchoolRepository'
 import { RequestError } from '@/lib/utils'
 
 export async function registerSchoolAction(formData: FormData) {
-    const { cue, locality } = Object.fromEntries(formData.entries())
+    const { cue, locality, name } = Object.fromEntries(formData.entries())
 
-    if (!cue || cue instanceof File || !locality || locality instanceof File) {
+    if (
+        !cue ||
+        cue instanceof File ||
+        !name ||
+        name instanceof File ||
+        !locality ||
+        locality instanceof File
+    ) {
         return ['Debe completar todos los campos.']
     }
 
-    const school = { cue, locality }
+    const school = { cue, locality, name }
 
     try {
         await SchoolRepository.save(school)
