@@ -46,6 +46,18 @@ class UserRepository {
         return await res.json()
     }
 
+    static async validateSession() {
+        try {
+            const res = await fetch(`${process.env.GREENALERT_API_URL}/user/validate`)
+
+            if (!res.ok) return { authorized: false }
+
+            return { authorized: true }
+        } catch (error) {
+            return { authorized: false }
+        }
+    }
+
     static async login(newUser: NewUser) {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/user/login`, {
             method: 'POST',
