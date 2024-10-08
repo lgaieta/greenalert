@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
-import Header from '@/components/header'
+import Header from '@/components/header/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LeafletProvider } from '@/components/leaflet-provider'
 

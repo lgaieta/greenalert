@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
-export default function Header() {
+export default function DefaultHeader() {
     return (
         <header className='w-full py-3 border-b border-b-border/40'>
             <div className='container flex items-center justify-between'>
@@ -18,35 +18,7 @@ export default function Header() {
                             variant={'link'}
                             size={'sm'}
                         >
-                            <Link href='/nuevo-problema'>Nuevo problema</Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant={'link'}
-                            size={'sm'}
-                        >
-                            <Link href='/directores/nuevo'>Nuevo director</Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant={'link'}
-                            size={'sm'}
-                        >
-                            <Link href='/directores'>Directores</Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant={'link'}
-                            size={'sm'}
-                        >
-                            <Link href='/escuelas/crear'>Nueva escuela</Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant={'link'}
-                            size={'sm'}
-                        >
-                            <Link href='/escuelas'>Escuelas</Link>
+                            <Link href='/nuevo-problema'>Problemas</Link>
                         </Button>
                     </div>
                 </div>
