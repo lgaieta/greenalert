@@ -1,4 +1,6 @@
+import { Button } from '@/components/ui/button'
 import SchoolRepository from '@/lib/services/SchoolRepository'
+import Link from 'next/link'
 
 async function SchoolListPage() {
     const schools = await SchoolRepository.list()
@@ -8,6 +10,9 @@ async function SchoolListPage() {
                 <header className='max-w-sm flex flex-col gap-2 text-center'>
                     <h1 className='text-3xl font-bold'>Escuelas</h1>
                 </header>
+                <Button asChild>
+                    <Link href='/escuelas/crear'>Nueva escuela</Link>
+                </Button>
                 <ul className='flex flex-col gap-4 max-w-xl w-full'>
                     {schools.map(school => (
                         <li
