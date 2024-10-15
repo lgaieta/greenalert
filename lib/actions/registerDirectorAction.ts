@@ -44,7 +44,7 @@ export async function registerDirectorAction(
 
         return {
             errors: {
-                general: 'No existe un usuario con ese email.'
+                general: 'Ha ocurrido un error.'
             }
         }
     }
