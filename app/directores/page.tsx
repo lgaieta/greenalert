@@ -1,4 +1,6 @@
+import { Button } from '@/components/ui/button'
 import UserRepository from '@/lib/services/UserRepository'
+import Link from 'next/link'
 
 async function DirectorListPage() {
     const users = await UserRepository.listDirectors()
@@ -9,6 +11,9 @@ async function DirectorListPage() {
                 <header className='max-w-sm flex flex-col gap-2 text-center'>
                     <h1 className='text-3xl font-bold'>Directores</h1>
                 </header>
+                <Button asChild>
+                    <Link href='/directores/nuevo'>Nuevo director</Link>
+                </Button>
                 <ul className='flex flex-col gap-4 max-w-xl w-full'>
                     {users.map(user => (
                         <li
