@@ -1,5 +1,6 @@
 import type School from '@/lib/entities/School'
 import { RequestError } from '@/lib/utils'
+import { cookies } from 'next/headers'
 
 class SchoolRepository {
     static async list(): Promise<School[]> {
@@ -14,7 +15,8 @@ class SchoolRepository {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/school`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Cookie: `access_token=${cookies().get('access_token')?.value || ''},`
             },
             body: JSON.stringify(school)
         })
