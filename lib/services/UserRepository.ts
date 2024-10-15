@@ -2,6 +2,7 @@ import type User from '@/lib/entities/User'
 import NewUser from '../entities/NewUser'
 import { RequestError } from '../utils'
 import UserType from '@/lib/entities/UserType'
+import { cookies } from 'next/headers'
 
 class UserRepository {
     static async register(newUser: NewUser) {
@@ -51,7 +52,15 @@ class UserRepository {
         { authorized: false } | { authorized: true; usertype: UserType }
     > {
         try {
-            const res = await fetch(`${process.env.GREENALERT_API_URL}/user/validate`)
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return { authorized: false }
+
+            const res = await fetch(`${process.env.GREENALERT_API_URL}/user/validate`, {
+                headers: {
+                    Cookie: `access_token=${accessToken.value},`
+                }
+            })
             if (!res.ok) return { authorized: false } as const
             const { usertype } = await res.json()
 
