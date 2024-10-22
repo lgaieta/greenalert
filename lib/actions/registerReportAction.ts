@@ -1,17 +1,37 @@
 'use server'
 
+import UserType from '@/lib/entities/UserType'
 import ReportRepository from '@/lib/services/ReportRepository'
+import SessionManager from '@/lib/services/SessionManager'
 import { RequestError } from '@/lib/utils'
 import { LatLngTuple } from 'leaflet'
 
 export async function registerReportAction(latLng: LatLngTuple, formData: FormData) {
-    const { description } = Object.fromEntries(formData.entries())
+    const { description, reportType } = Object.fromEntries(formData.entries())
 
-    if (!description || description instanceof File) {
+    if (
+        !description ||
+        description instanceof File ||
+        !reportType ||
+        reportType instanceof File
+    ) {
         return ['Debe completar todos los campos.']
     }
 
-    const report = { id: 1, lat: latLng[0], lng: latLng[1], description }
+    const { authorized, email, usertype } = await SessionManager.validateSession()
+
+    if (!authorized || usertype !== UserType.Student) return ['Sin autorizar.']
+
+    const report = {
+        id: 1,
+        courseId: 1,
+        lat: latLng[0],
+        lng: latLng[1],
+        description,
+        email,
+        type: Number(reportType),
+        locality: 1
+    }
 
     try {
         await ReportRepository.save(report)

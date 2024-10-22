@@ -1,5 +1,5 @@
 'use client'
-import NewReportForm from '@/components/new-report-form'
+import NewReportForm from '@/components/new-report/new-report-form'
 
 function NewReportPage() {
     return (

@@ -1,4 +1,5 @@
 'use client'
+import ReportTypeSelect from '@/components/new-report/report-type-select'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -30,37 +31,52 @@ function NewReportForm() {
                     required
                 />
             </div>
-            <div className='flex flex-col items-center gap-2 w-full'>
-                <Label className='max-w-sm w-full'>Elegir ubicación</Label>
-                <div className='w-full px-4 md:px-16 max-w-4xl'>
-                    <MapContainer
-                        center={DEFAULT_MAP_POSITION}
-                        zoom={13}
-                        className='h-[500px] w-full'
-                    >
-                        <TileLayer
-                            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        />
-                        <ReportMarker
-                            position={position}
-                            onPositionChange={setPosition}
-                        />
-                    </MapContainer>
-                </div>
-            </div>
+            <MapSelector
+                position={position}
+                onPositionChange={setPosition}
+            />
+            <ReportTypeSelect />
             <SubmitButton />
         </form>
     )
 }
 
-type ReportMarkerProps = {
+function MapSelector(props: {
     position: LatLngTuple
     // eslint-disable-next-line no-unused-vars
     onPositionChange: (latlng: LatLngTuple) => void
+}) {
+    return (
+        <div className='flex flex-col items-center gap-2 w-full'>
+            <Label className='max-w-sm w-full'>Elegir ubicación</Label>
+            <div className='w-full px-4 md:px-16 max-w-4xl'>
+                <MapContainer
+                    center={DEFAULT_MAP_POSITION}
+                    zoom={13}
+                    className='h-[500px] w-full'
+                >
+                    <TileLayer
+                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <ReportMarker
+                        position={props.position}
+                        onPositionChange={props.onPositionChange}
+                    />
+                </MapContainer>
+            </div>
+        </div>
+    )
 }
 
-function ReportMarker({ position, onPositionChange }: ReportMarkerProps) {
+function ReportMarker({
+    position,
+    onPositionChange
+}: {
+    position: LatLngTuple
+    // eslint-disable-next-line no-unused-vars
+    onPositionChange: (latlng: LatLngTuple) => void
+}) {
     useMapEvent('click', e => {
         const { lat, lng } = e.latlng
         onPositionChange([lat, lng])

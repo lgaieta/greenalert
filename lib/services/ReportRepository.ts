@@ -21,6 +21,18 @@ class ReportRepository {
 
         return res
     }
+
+    static async list(): Promise<Report[]> {
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/report`)
+
+        if (!res.ok)
+            throw new RequestError(
+                'Error al obtener los reportes (http request).',
+                res.status
+            )
+
+        return await res.json()
+    }
 }
 
 export default ReportRepository

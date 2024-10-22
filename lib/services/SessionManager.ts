@@ -19,7 +19,7 @@ class SessionManager {
 
         if (!authorized) return { authorized }
 
-        return { authorized, usertype: result.usertype }
+        return { authorized, usertype: result.usertype, email: result.email }
     }
 }
 

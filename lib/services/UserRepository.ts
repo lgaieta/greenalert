@@ -49,7 +49,7 @@ class UserRepository {
     }
 
     static async validateSession(): Promise<
-        { authorized: false } | { authorized: true; usertype: UserType }
+        { authorized: false } | { authorized: true; usertype: UserType; email: string }
     > {
         try {
             const accessToken = cookies().get('access_token')
@@ -62,9 +62,9 @@ class UserRepository {
                 }
             })
             if (!res.ok) return { authorized: false } as const
-            const { usertype } = await res.json()
+            const { usertype, email } = await res.json()
 
-            return { authorized: true, usertype } as const
+            return { authorized: true, usertype, email } as const
         } catch (error) {
             return { authorized: false } as const
         }
