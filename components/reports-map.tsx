@@ -2,7 +2,7 @@
 
 import Report from '@/lib/entities/Report'
 import { LatLngTuple } from 'leaflet'
-import { MapContainer, Marker, TileLayer } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 const DEFAULT_MAP_POSITION: LatLngTuple = [-34.607346526878345, -418.44560643938166]
 
@@ -16,11 +16,11 @@ function ReportsMap({ reports }: ReportsMapProps) {
         reports.at(0)?.lng || DEFAULT_MAP_POSITION[1]
     ]
     return (
-        <div className='w-full px-4 md:px-16 max-w-4xl'>
+        <div className='w-full px-4 md:px-16'>
             <MapContainer
                 center={firstMapPosition}
                 zoom={13}
-                className='h-[500px] w-full'
+                className='h-[500px] md:h-[600px] xl:h-[800px] w-full'
             >
                 <TileLayer
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -30,9 +30,22 @@ function ReportsMap({ reports }: ReportsMapProps) {
                     <Marker
                         position={[report.lat, report.lng]}
                         key={report.id}
-                    ></Marker>
+                    >
+                        <Popup>
+                            <ReportInfo report={report} />
+                        </Popup>
+                    </Marker>
                 ))}
             </MapContainer>
+        </div>
+    )
+}
+
+function ReportInfo({ report }: { report: Report }) {
+    return (
+        <div className='flex flex-col gap-2'>
+            <p className='text-xl font-bold'>{report.description}</p>
+            <p>{report.type}</p>
         </div>
     )
 }

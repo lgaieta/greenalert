@@ -33,6 +33,18 @@ class ReportRepository {
 
         return await res.json()
     }
+
+    static async getById(id: Report['id']): Promise<Report> {
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/report/unit/${id}`)
+
+        if (!res.ok)
+            throw new RequestError(
+                'Error al obtener el tipo de reporte (http request).',
+                res.status
+            )
+
+        return (await res.json()).type
+    }
 }
 
 export default ReportRepository
