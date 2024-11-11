@@ -3,6 +3,7 @@
 import type { NewDirectorFormState } from '@/components/new-director-form'
 import UserRepository from '@/lib/services/UserRepository'
 import { RequestError } from '@/lib/utils'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export async function registerDirectorAction(
@@ -49,5 +50,6 @@ export async function registerDirectorAction(
         }
     }
 
+    revalidatePath('/directores')
     redirect('/directores')
 }
