@@ -1,8 +1,13 @@
 import { Button } from '@/components/ui/button'
 import SchoolRepository from '@/lib/services/SchoolRepository'
+import SessionManager from '@/lib/services/SessionManager'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 async function SchoolListPage() {
+    const { authorized } = await SessionManager.validateSession()
+
+    if (!authorized) return redirect('/')
     const schools = await SchoolRepository.list()
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>

@@ -1,6 +1,12 @@
 import { LoginForm } from '@/components/login-form'
+import SessionManager from '@/lib/services/SessionManager'
+import { redirect } from 'next/navigation'
 
-function LoginPage() {
+async function LoginPage() {
+    const { authorized } = await SessionManager.validateSession()
+
+    if (authorized) return redirect('/')
+
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12'>
             <div className='max-w-sm w-full space-y-6'>

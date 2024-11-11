@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import LogoutButton from '@/components/header/logout-button'
 
 export default function StudentHeader() {
     return (
@@ -36,6 +37,7 @@ export default function StudentHeader() {
                         </Button>
                     </div>
                 </nav>
+                <LogoutButton />
             </div>
         </header>
     )

@@ -1,7 +1,12 @@
-'use client'
 import NewReportForm from '@/components/new-report/new-report-form'
+import SessionManager from '@/lib/services/SessionManager'
+import { redirect } from 'next/navigation'
 
-function NewReportPage() {
+async function NewReportPage() {
+    const { authorized } = await SessionManager.validateSession()
+
+    if (!authorized) return redirect('/')
+
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>
             <div className='flex flex-col items-center w-full space-y-10'>

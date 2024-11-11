@@ -1,6 +1,12 @@
 import NewDirectorForm from '@/components/new-director-form'
+import SessionManager from '@/lib/services/SessionManager'
+import { redirect } from 'next/navigation'
 
-function NewDirectorRepository() {
+async function NewDirectorRepository() {
+    const { authorized } = await SessionManager.validateSession()
+
+    if (!authorized) return redirect('/')
+
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>
             <div className='flex flex-col items-center w-full space-y-10'>

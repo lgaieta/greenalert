@@ -13,6 +13,10 @@ class SessionManager {
         }
     }
 
+    static removeSession() {
+        cookies().delete('access_token')
+    }
+
     static async validateSession() {
         const result = await UserRepository.validateSession()
         const { authorized } = result

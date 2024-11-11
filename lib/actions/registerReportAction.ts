@@ -5,6 +5,8 @@ import ReportRepository from '@/lib/services/ReportRepository'
 import SessionManager from '@/lib/services/SessionManager'
 import { RequestError } from '@/lib/utils'
 import { LatLngTuple } from 'leaflet'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export async function registerReportAction(latLng: LatLngTuple, formData: FormData) {
     const { description, reportType } = Object.fromEntries(formData.entries())
@@ -24,7 +26,7 @@ export async function registerReportAction(latLng: LatLngTuple, formData: FormDa
 
     const report = {
         id: 1,
-        courseId: 1,
+        courseId: 2,
         lat: latLng[0],
         lng: latLng[1],
         description,
@@ -50,6 +52,9 @@ export async function registerReportAction(latLng: LatLngTuple, formData: FormDa
 
         return ['Error al registrar el usuario.']
     }
+
+    revalidatePath('/mapa')
+    redirect('/mapa')
 
     return []
 }

@@ -1,4 +1,4 @@
-import Report from '@/lib/entities/Report'
+import Report, { type ExtendedReport } from '@/lib/entities/Report'
 import { RequestError } from '@/lib/utils'
 import { cookies } from 'next/headers'
 
@@ -22,7 +22,7 @@ class ReportRepository {
         return res
     }
 
-    static async list(): Promise<Report[]> {
+    static async list(): Promise<ExtendedReport[]> {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/report`)
 
         if (!res.ok)

@@ -1,13 +1,13 @@
 'use client'
 
-import Report from '@/lib/entities/Report'
+import { type ExtendedReport } from '@/lib/entities/Report'
 import { LatLngTuple } from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 const DEFAULT_MAP_POSITION: LatLngTuple = [-34.607346526878345, -418.44560643938166]
 
 type ReportsMapProps = {
-    reports: Report[]
+    reports: ExtendedReport[]
 }
 
 function ReportsMap({ reports }: ReportsMapProps) {
@@ -41,11 +41,14 @@ function ReportsMap({ reports }: ReportsMapProps) {
     )
 }
 
-function ReportInfo({ report }: { report: Report }) {
+function ReportInfo({ report }: { report: ExtendedReport }) {
+    console.log(report.schoolName)
     return (
         <div className='flex flex-col gap-2'>
-            <p className='text-xl font-bold'>{report.description}</p>
-            <p>{report.type}</p>
+            <p className='text-xl !my-0 font-bold'>{report.description}</p>
+            <p className='text-base !my-0'>Escuela: {report.schoolName}</p>
+            <p className='!my-0'>Tipo de problema: {report.typeName}</p>
+            <p className='!my-0'>Localidad: {report.localityName}</p>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import LogoutButton from '@/components/header/logout-button'
 
 export default function DirectorHeader() {
     return (
@@ -29,6 +30,7 @@ export default function DirectorHeader() {
                         </Button>
                     </div>
                 </nav>
+                <LogoutButton />
             </div>
         </header>
     )

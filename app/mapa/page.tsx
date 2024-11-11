@@ -3,6 +3,7 @@ import ReportRepository from '@/lib/services/ReportRepository'
 
 async function MapPage() {
     const reports = await ReportRepository.list()
+    console.log(reports)
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>
             <div className='flex flex-col items-center w-full space-y-10'>

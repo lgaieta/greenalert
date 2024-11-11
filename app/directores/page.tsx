@@ -1,8 +1,14 @@
 import { Button } from '@/components/ui/button'
+import SessionManager from '@/lib/services/SessionManager'
 import UserRepository from '@/lib/services/UserRepository'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 async function DirectorListPage() {
+    const { authorized } = await SessionManager.validateSession()
+
+    if (!authorized) return redirect('/')
+
     const users = await UserRepository.listDirectors()
 
     return (
