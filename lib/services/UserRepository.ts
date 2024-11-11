@@ -40,12 +40,57 @@ class UserRepository {
             )
     }
 
+    static async registerProfessor(email: User['email']) {
+        const accessToken = cookies().get('access_token')
+
+        if (!accessToken) throw new RequestError('Usuario no autorizado.', 403)
+
+        const res = await fetch(
+            `${process.env.GREENALERT_API_URL}/user/professor/register`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Cookie: `access_token=${accessToken.value},`
+                },
+                body: JSON.stringify({ email })
+            }
+        )
+
+        if (!res.ok)
+            throw new RequestError(
+                'Error al registrar el usuario (http request).',
+                res.status
+            )
+    }
+
     static async listDirectors(): Promise<User[]> {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/user/director`)
 
         if (!res.ok) throw new RequestError('Error al listar los directores', res.status)
 
         return await res.json()
+    }
+
+    static async listProfessors(): Promise<User[]> {
+        try {
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return []
+
+            const res = await fetch(`${process.env.GREENALERT_API_URL}/user/professor`, {
+                headers: {
+                    Cookie: `access_token=${accessToken.value},`
+                }
+            })
+
+            if (!res.ok)
+                throw new RequestError('Error al listar los profesores', res.status)
+
+            return await res.json()
+        } catch (error) {
+            return []
+        }
     }
 
     static async validateSession(): Promise<
