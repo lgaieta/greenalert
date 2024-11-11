@@ -55,6 +55,4 @@ export async function registerReportAction(latLng: LatLngTuple, formData: FormDa
 
     revalidatePath('/mapa')
     redirect('/mapa')
-
-    return []
 }
