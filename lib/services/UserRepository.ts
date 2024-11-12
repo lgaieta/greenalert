@@ -65,7 +65,15 @@ class UserRepository {
     }
 
     static async listDirectors(): Promise<User[]> {
-        const res = await fetch(`${process.env.GREENALERT_API_URL}/user/director`)
+        const accessToken = cookies().get('access_token')
+
+        if (!accessToken) return []
+
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/user/director`, {
+            headers: {
+                Cookie: `access_token=${accessToken.value},`
+            }
+        })
 
         if (!res.ok) throw new RequestError('Error al listar los directores', res.status)
 
@@ -121,7 +129,6 @@ class UserRepository {
             headers: {
                 'Content-Type': 'application/json'
             },
-            credentials: 'include',
             body: JSON.stringify(newUser)
         })
 

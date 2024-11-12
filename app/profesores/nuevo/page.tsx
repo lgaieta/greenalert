@@ -1,4 +1,4 @@
-import NewDirectorForm from '@/components/new-director-form'
+import NewProfessorForm from '@/components/new-professor-form'
 import SessionManager from '@/lib/services/SessionManager'
 import { redirect } from 'next/navigation'
 
@@ -13,7 +13,7 @@ async function NewProfessorPage() {
                 <header className='max-w-sm flex flex-col gap-2 text-center'>
                     <h1 className='text-3xl font-bold'>Nuevo profesor</h1>
                 </header>
-                <NewDirectorForm />
+                <NewProfessorForm />
             </div>
         </main>
     )
