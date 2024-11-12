@@ -26,7 +26,7 @@ export default function ProfessorHeader() {
                             variant={'link'}
                             size={'sm'}
                         >
-                            <Link href='/cursos'>Cursos</Link>
+                            <Link href='/cursos/profesor'>Cursos</Link>
                         </Button>
                     </div>
                 </nav>
