@@ -141,6 +141,7 @@ class UserRepository {
                     method: 'POST',
                     body: JSON.stringify({ cue, email }),
                     headers: {
+                        'Content-Type': 'application/json',
                         Cookie: `access_token=${accessToken.value},`
                     }
                 }

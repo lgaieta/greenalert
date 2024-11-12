@@ -1,3 +1,4 @@
+import DirectorSelector from '@/components/director-selector'
 import { Card, CardContent } from '@/components/ui/card'
 import type School from '@/lib/entities/School'
 import UserType from '@/lib/entities/UserType'
@@ -20,10 +21,10 @@ async function SchoolDetailsPage({ params }: { params: { cue: string } }) {
                     <h1 className='text-3xl font-bold'>{school.name}</h1>
                 </header>
                 <Card>
-                    <CardContent className='p-8'>
+                    <CardContent className='flex flex-col p-8 gap-4'>
                         <p>CUE: {school.cue}</p>
                         <SchoolDirector cue={school.cue} />
-                        <DirectorSelector />
+                        <DirectorSelector cue={school.cue} />
                     </CardContent>
                 </Card>
             </div>
@@ -34,10 +35,6 @@ async function SchoolDetailsPage({ params }: { params: { cue: string } }) {
 async function SchoolDirector(props: { cue: School['cue'] }) {
     const director = await UserRepository.getSchoolDirector(props.cue)
     return <p>Director: {director?.email || 'No hay un director asignado'}</p>
-}
-
-function DirectorSelector() {
-    return <div>asdas</div>
 }
 
 export default SchoolDetailsPage
