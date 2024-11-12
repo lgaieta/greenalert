@@ -3,6 +3,7 @@ import NewUser from '../entities/NewUser'
 import { RequestError } from '../utils'
 import UserType from '@/lib/entities/UserType'
 import { cookies } from 'next/headers'
+import type School from '@/lib/entities/School'
 
 class UserRepository {
     static async register(newUser: NewUser) {
@@ -98,6 +99,62 @@ class UserRepository {
             return await res.json()
         } catch (error) {
             return []
+        }
+    }
+
+    static async getSchoolDirector(cue: School['cue']): Promise<User | null> {
+        try {
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return null
+
+            const res = await fetch(
+                `${process.env.GREENALERT_API_URL}/user/director/school/${encodeURIComponent(cue)}`,
+                {
+                    headers: {
+                        Cookie: `access_token=${accessToken.value},`
+                    }
+                }
+            )
+
+            if (!res.ok)
+                throw new RequestError(
+                    'Error al obtener el director de la escuela',
+                    res.status
+                )
+
+            return await res.json()
+        } catch (error) {
+            return null
+        }
+    }
+
+    static async setSchoolDirector(cue: School['cue'], email: User['email']) {
+        try {
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return null
+
+            const res = await fetch(
+                `${process.env.GREENALERT_API_URL}/user/director/school`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify({ cue, email }),
+                    headers: {
+                        Cookie: `access_token=${accessToken.value},`
+                    }
+                }
+            )
+
+            if (!res.ok)
+                throw new RequestError(
+                    'Error al obtener el director de la escuela',
+                    res.status
+                )
+
+            return await res.json()
+        } catch (error) {
+            return null
         }
     }
 
