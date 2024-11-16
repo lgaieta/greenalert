@@ -40,6 +40,17 @@ export function RegisterForm() {
                     type='password'
                 />
             </div>
+            <div className='grid gap-2'>
+                <Label htmlFor='repeatedPassword'>Repetir contraseña</Label>
+                <Input
+                    id='repeatedPassword'
+                    name='repeatedPassword'
+                    placeholder='••••••••'
+                    required
+                    minLength={6}
+                    type='password'
+                />
+            </div>
             <SubmitButton />
             {errors.map(error => (
                 <p
