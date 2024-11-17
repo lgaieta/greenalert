@@ -1,6 +1,7 @@
 'use server'
 
 import type { NewProfessorFormState } from '@/components/new-professor-form'
+import SessionManager from '@/lib/services/SessionManager'
 import UserRepository from '@/lib/services/UserRepository'
 import { RequestError } from '@/lib/utils'
 import { revalidatePath } from 'next/cache'
@@ -20,8 +21,26 @@ export async function registerProfessorAction(
         }
     }
 
+    const validatedSession = await SessionManager.validateSession()
+
+    if (!validatedSession.authorized)
+        return {
+            errors: {
+                general: 'Debes iniciar sesión.'
+            }
+        }
+
+    const { schoolCue } = validatedSession
+
+    if (!schoolCue)
+        return {
+            errors: {
+                general: 'No tienes un colegio asignado.'
+            }
+        }
+
     try {
-        await UserRepository.registerProfessor(email)
+        await UserRepository.registerProfessor(email, schoolCue)
     } catch (error) {
         console.error(error)
 

@@ -7,7 +7,8 @@ class SessionManager {
             setCookieHeader.forEach(cookie => {
                 const [cookieName, ...cookieAttributes] = cookie.split('=')
                 cookies().set(cookieName, cookieAttributes.join('='), {
-                    httpOnly: true
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production'
                 })
             })
         }
@@ -23,7 +24,7 @@ class SessionManager {
 
         if (!authorized) return { authorized }
 
-        return { authorized, usertype: result.usertype, email: result.email }
+        return result
     }
 }
 

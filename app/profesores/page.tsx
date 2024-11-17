@@ -1,15 +1,33 @@
 import { Button } from '@/components/ui/button'
+import UserType from '@/lib/entities/UserType'
 import SessionManager from '@/lib/services/SessionManager'
 import UserRepository from '@/lib/services/UserRepository'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 async function ProfessorListPage() {
-    const { authorized } = await SessionManager.validateSession()
+    const validation = await SessionManager.validateSession()
 
-    if (!authorized) return redirect('/')
+    if (!validation.authorized || validation.usertype !== UserType.Director)
+        return redirect('/')
 
-    const users = await UserRepository.listProfessors()
+    const { schoolCue } = validation
+
+    if (!schoolCue)
+        return (
+            <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>
+                <div className='flex flex-col items-center w-full space-y-10'>
+                    <header className='max-w-sm flex flex-col gap-2 text-center'>
+                        <h1 className='text-xl font-bold'>
+                            No posee una escuela asignada a su cuenta, solicite al
+                            administrador su asignación.
+                        </h1>
+                    </header>
+                </div>
+            </main>
+        )
+
+    const users = await UserRepository.listProfessorsByCue(schoolCue)
 
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>

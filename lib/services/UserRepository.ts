@@ -41,7 +41,7 @@ class UserRepository {
             )
     }
 
-    static async registerProfessor(email: User['email']) {
+    static async registerProfessor(email: User['email'], schoolCue: School['cue']) {
         const accessToken = cookies().get('access_token')
 
         if (!accessToken) throw new RequestError('Usuario no autorizado.', 403)
@@ -54,7 +54,7 @@ class UserRepository {
                     'Content-Type': 'application/json',
                     Cookie: `access_token=${accessToken.value},`
                 },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email, schoolCue })
             }
         )
 
@@ -92,6 +92,30 @@ class UserRepository {
                     Cookie: `access_token=${accessToken.value},`
                 }
             })
+
+            if (!res.ok)
+                throw new RequestError('Error al listar los profesores', res.status)
+
+            return await res.json()
+        } catch (error) {
+            return []
+        }
+    }
+
+    static async listProfessorsByCue(cue: School['cue']): Promise<User[]> {
+        try {
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return []
+
+            const res = await fetch(
+                `${process.env.GREENALERT_API_URL}/user/professor/cue/${encodeURIComponent(cue)}`,
+                {
+                    headers: {
+                        Cookie: `access_token=${accessToken.value},`
+                    }
+                }
+            )
 
             if (!res.ok)
                 throw new RequestError('Error al listar los profesores', res.status)
@@ -160,7 +184,13 @@ class UserRepository {
     }
 
     static async validateSession(): Promise<
-        { authorized: false } | { authorized: true; usertype: UserType; email: string }
+        | { authorized: false }
+        | {
+              authorized: true
+              usertype: UserType
+              email: User['email']
+              schoolCue: School['cue'] | null
+          }
     > {
         try {
             const accessToken = cookies().get('access_token')
@@ -173,9 +203,9 @@ class UserRepository {
                 }
             })
             if (!res.ok) return { authorized: false } as const
-            const { usertype, email } = await res.json()
+            const { usertype, email, schoolCue = null } = await res.json()
 
-            return { authorized: true, usertype, email } as const
+            return { authorized: true, usertype, email, schoolCue } as const
         } catch (error) {
             return { authorized: false } as const
         }
