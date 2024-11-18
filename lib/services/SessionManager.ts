@@ -22,7 +22,8 @@ class SessionManager {
         const result = await UserRepository.validateSession()
         const { authorized } = result
 
-        if (!authorized) return { authorized }
+        if (!authorized)
+            return { authorized, email: null, usertype: null, schoolCue: null }
 
         return result
     }

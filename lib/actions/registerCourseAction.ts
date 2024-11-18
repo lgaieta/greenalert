@@ -2,6 +2,7 @@
 
 import type { NewCourseFormState } from '@/components/new-course-form'
 import CourseRepository from '@/lib/services/CourseRepository'
+import SessionManager from '@/lib/services/SessionManager'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -20,11 +21,20 @@ export async function registerCourseAction(
         }
     }
 
+    const { schoolCue } = await SessionManager.validateSession()
+
+    if (!schoolCue)
+        return {
+            errors: {
+                general: 'Debes iniciar sesión.'
+            }
+        }
+
     try {
         await CourseRepository.registerCourse({
             professorEmail: email,
             name,
-            schoolCue: 12345678
+            schoolCue: Number(schoolCue)
         })
     } catch (error) {
         console.error(error)

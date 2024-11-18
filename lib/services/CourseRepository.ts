@@ -42,7 +42,8 @@ class CourseRepository {
             body: JSON.stringify(courseFields),
             method: 'POST',
             headers: {
-                Cookie: `access_token=${accessToken.value},`
+                Cookie: `access_token=${accessToken.value},`,
+                'Content-Type': 'application/json'
             }
         })
 

@@ -13,6 +13,8 @@ async function ProfessorCoursesPage() {
 
     const courses = await CourseRepository.listByProfessorEmail(email)
 
+    console.log(courses)
+
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24 px-6'>
             <div className='flex flex-col gap-10 items-center w-full max-w-2xl'>
@@ -32,16 +34,22 @@ async function ProfessorCoursesPage() {
                         Aún no has creado ningun curso.
                     </p>
                 ) : (
-                    <ul className='w-full grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                    <ul className='w-full grid grid-cols-1 gap-4'>
                         {courses.map(course => (
                             <li key={course.id}>
-                                <Card className='w-full'>
-                                    <CardHeader className='p-8 sm:p-12'>
+                                <Card className='flex justify-between p-8 sm:p-12 items-centerw-full'>
+                                    <CardHeader className='p-0'>
                                         <CardTitle className='text-xl'>
                                             {course.name}
                                         </CardTitle>
                                         <CardDescription className='text-base'>
                                             {course.schoolName}
+                                            <p className='pt-2'>
+                                                Código:{' '}
+                                                <strong className='text-foreground'>
+                                                    {course.invitationCode}
+                                                </strong>
+                                            </p>
                                         </CardDescription>
                                     </CardHeader>
                                 </Card>
