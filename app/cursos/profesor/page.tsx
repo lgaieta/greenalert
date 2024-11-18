@@ -13,8 +13,6 @@ async function ProfessorCoursesPage() {
 
     const courses = await CourseRepository.listByProfessorEmail(email)
 
-    console.log(courses)
-
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24 px-6'>
             <div className='flex flex-col gap-10 items-center w-full max-w-2xl'>

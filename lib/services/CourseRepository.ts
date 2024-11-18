@@ -52,6 +52,31 @@ class CourseRepository {
 
         return await res.json()
     }
+
+    static async getByStudentEmail(email: User['email']): Promise<Course | null> {
+        const accessToken = cookies().get('access_token')
+
+        if (!accessToken) {
+            throw new RequestError('No hay un token de acceso', 403)
+        }
+
+        const res = await fetch(
+            `${process.env.GREENALERT_API_URL}/course/student/${encodeURIComponent(email)}`,
+            {
+                headers: {
+                    Cookie: `access_token=${accessToken.value},`
+                }
+            }
+        )
+
+        if (!res.ok)
+            throw new RequestError(
+                'Error al obtener el curso del alumno (http request).',
+                res.status
+            )
+
+        return await res.json()
+    }
 }
 
 export default CourseRepository

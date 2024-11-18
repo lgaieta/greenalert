@@ -26,7 +26,7 @@ export default function StudentHeader() {
                             variant={'link'}
                             size={'sm'}
                         >
-                            <Link href='/cursos'>Mis cursos</Link>
+                            <Link href='/cursos'>Mi curso</Link>
                         </Button>
                         <Button
                             asChild
