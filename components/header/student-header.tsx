@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import LogoutButton from '@/components/header/logout-button'
+import CourseRepository from '@/lib/services/CourseRepository'
 
-export default function StudentHeader() {
+export default async function StudentHeader(props: { email: string }) {
+    const course = await CourseRepository.getByStudentEmail(props.email)
+
     return (
         <header className='w-full py-3 border-b border-b-border/40'>
             <div className='container flex items-center justify-between'>
@@ -21,13 +24,15 @@ export default function StudentHeader() {
                         >
                             <Link href='/mapa'>Mapa</Link>
                         </Button>
-                        <Button
-                            asChild
-                            variant={'link'}
-                            size={'sm'}
-                        >
-                            <Link href='/cursos'>Mi curso</Link>
-                        </Button>
+                        {course && (
+                            <Button
+                                asChild
+                                variant={'link'}
+                                size={'sm'}
+                            >
+                                <Link href='/cursos'>Mi curso</Link>
+                            </Button>
+                        )}
                         <Button
                             asChild
                             variant={'link'}
@@ -37,7 +42,14 @@ export default function StudentHeader() {
                         </Button>
                     </div>
                 </nav>
-                <LogoutButton />
+                <div className='flex gap-2'>
+                    {course === null && (
+                        <Button asChild>
+                            <Link href={'/cursos/unirme'}>Unirme a un curso</Link>
+                        </Button>
+                    )}
+                    <LogoutButton />
+                </div>
             </div>
         </header>
     )

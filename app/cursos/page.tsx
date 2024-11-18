@@ -1,4 +1,7 @@
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { leaveCourseAction } from '@/lib/actions/leaveCourseAction'
+import type User from '@/lib/entities/User'
 import UserType from '@/lib/entities/UserType'
 import CourseRepository from '@/lib/services/CourseRepository'
 import SessionManager from '@/lib/services/SessionManager'
@@ -20,6 +23,7 @@ async function StudentCourse() {
                     <h1 className='text-3xl text-center min-[512px]:text-start w-full md:text-4xl lg:text-5xl font-bold'>
                         Mi curso
                     </h1>
+                    <LeaveCourseButton email={email} />
                 </header>
                 <Card className='flex justify-between p-8 sm:p-12 items-center w-full'>
                     <div className='flex flex-col gap-2'>
@@ -30,6 +34,14 @@ async function StudentCourse() {
                 </Card>
             </div>
         </main>
+    )
+}
+
+function LeaveCourseButton(props: { email: User['email'] }) {
+    return (
+        <form action={leaveCourseAction.bind(null, props.email)}>
+            <Button variant={'secondary'}>Salir del curso</Button>
+        </form>
     )
 }
 

@@ -7,10 +7,10 @@ import UserType from '@/lib/entities/UserType'
 import SessionManager from '@/lib/services/SessionManager'
 
 export default async function Header() {
-    const { authorized, usertype } = await SessionManager.validateSession()
+    const { authorized, usertype, email } = await SessionManager.validateSession()
 
     if (!authorized) return <DefaultHeader />
-    if (usertype === UserType.Student) return <StudentHeader />
+    if (usertype === UserType.Student) return <StudentHeader email={email} />
     if (usertype === UserType.Professor) return <ProfessorHeader />
     if (usertype === UserType.Director) return <DirectorHeader />
     if (usertype === UserType.Admin) return <AdminHeader />

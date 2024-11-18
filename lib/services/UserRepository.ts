@@ -252,6 +252,34 @@ class UserRepository {
 
         return res
     }
+
+    static async leaveCourse(email: User['email']) {
+        try {
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return
+
+            const res = await fetch(`${process.env.GREENALERT_API_URL}/course/leave`, {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Cookie: `access_token=${accessToken.value},`
+                }
+            })
+
+            if (!res.ok)
+                throw new RequestError(
+                    'Error al salir del curso (http request).',
+                    res.status
+                )
+
+            return await res.json()
+        } catch (error) {
+            console.error(error)
+            return
+        }
+    }
 }
 
 export default UserRepository
