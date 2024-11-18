@@ -4,6 +4,7 @@ import { RequestError } from '../utils'
 import UserType from '@/lib/entities/UserType'
 import { cookies } from 'next/headers'
 import type School from '@/lib/entities/School'
+import type Course from '@/lib/entities/Course'
 
 class UserRepository {
     static async register(newUser: NewUser) {
@@ -146,6 +147,32 @@ class UserRepository {
                     'Error al obtener el director de la escuela',
                     res.status
                 )
+
+            return await res.json()
+        } catch (error) {
+            return null
+        }
+    }
+
+    static async joinCourse(
+        invitationCode: Course['invitationCode'],
+        email: User['email']
+    ): Promise<User | null> {
+        try {
+            const accessToken = cookies().get('access_token')
+
+            if (!accessToken) return null
+
+            const res = await fetch(`${process.env.GREENALERT_API_URL}/course/join`, {
+                method: 'POST',
+                body: JSON.stringify({ invitationCode, email }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Cookie: `access_token=${accessToken.value},`
+                }
+            })
+
+            if (!res.ok) throw new RequestError('Error al unirse al curso', res.status)
 
             return await res.json()
         } catch (error) {
