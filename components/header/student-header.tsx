@@ -24,6 +24,13 @@ export default async function StudentHeader(props: { email: string }) {
                         >
                             <Link href='/mapa'>Mapa</Link>
                         </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/nuevo-problema'>Nuevo problema</Link>
+                        </Button>
                         {course && (
                             <Button
                                 asChild
@@ -33,13 +40,6 @@ export default async function StudentHeader(props: { email: string }) {
                                 <Link href='/cursos'>Mi curso</Link>
                             </Button>
                         )}
-                        <Button
-                            asChild
-                            variant={'link'}
-                            size={'sm'}
-                        >
-                            <Link href='/nuevo-problema'>Nuevo problema</Link>
-                        </Button>
                     </div>
                 </nav>
                 <div className='flex gap-2'>
