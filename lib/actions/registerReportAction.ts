@@ -1,6 +1,7 @@
 'use server'
 
 import UserType from '@/lib/entities/UserType'
+import CourseRepository from '@/lib/services/CourseRepository'
 import ReportRepository from '@/lib/services/ReportRepository'
 import SessionManager from '@/lib/services/SessionManager'
 import { RequestError } from '@/lib/utils'
@@ -24,9 +25,13 @@ export async function registerReportAction(latLng: LatLngTuple, formData: FormDa
 
     if (!authorized || usertype !== UserType.Student) return ['Sin autorizar.']
 
+    const course = await CourseRepository.getByStudentEmail(email)
+
+    if (!course) return ['El usuario no tiene un curso asignado.']
+
     const report = {
         id: 1,
-        courseId: 2,
+        courseId: course.id,
         lat: latLng[0],
         lng: latLng[1],
         description,
