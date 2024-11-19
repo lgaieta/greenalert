@@ -42,7 +42,6 @@ function ReportsMap({ reports }: ReportsMapProps) {
 }
 
 function ReportInfo({ report }: { report: ExtendedReport }) {
-    console.log(report.schoolName)
     return (
         <div className='flex flex-col gap-2'>
             <p className='text-xl !my-0 font-bold'>{report.description}</p>
