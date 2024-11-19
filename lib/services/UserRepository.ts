@@ -24,12 +24,17 @@ class UserRepository {
     }
 
     static async registerDirector(email: User['email']) {
+        const accessToken = cookies().get('access_token')
+
+        if (!accessToken) throw new RequestError('Usuario no autorizado.', 403)
+
         const res = await fetch(
             `${process.env.GREENALERT_API_URL}/user/director/register`,
             {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Cookie: `access_token=${accessToken.value},`
                 },
                 body: JSON.stringify({ email })
             }
