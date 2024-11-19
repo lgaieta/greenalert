@@ -1,5 +1,6 @@
 'use client'
 
+import { LeafletProvider } from '@/components/leaflet-provider'
 import { type ExtendedReport } from '@/lib/entities/Report'
 import { LatLngTuple } from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
@@ -16,28 +17,30 @@ function ReportsMap({ reports }: ReportsMapProps) {
         reports.at(0)?.lng || DEFAULT_MAP_POSITION[1]
     ]
     return (
-        <div className='w-full px-4 md:px-16'>
-            <MapContainer
-                center={firstMapPosition}
-                zoom={13}
-                className='h-[500px] md:h-[600px] xl:h-[800px] w-full'
-            >
-                <TileLayer
-                    url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {reports.map(report => (
-                    <Marker
-                        position={[report.lat, report.lng]}
-                        key={report.id}
-                    >
-                        <Popup>
-                            <ReportInfo report={report} />
-                        </Popup>
-                    </Marker>
-                ))}
-            </MapContainer>
-        </div>
+        <LeafletProvider>
+            <div className='w-full px-4 md:px-16'>
+                <MapContainer
+                    center={firstMapPosition}
+                    zoom={13}
+                    className='h-[500px] md:h-[600px] xl:h-[800px] w-full'
+                >
+                    <TileLayer
+                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    {reports.map(report => (
+                        <Marker
+                            position={[report.lat, report.lng]}
+                            key={report.id}
+                        >
+                            <Popup>
+                                <ReportInfo report={report} />
+                            </Popup>
+                        </Marker>
+                    ))}
+                </MapContainer>
+            </div>
+        </LeafletProvider>
     )
 }
 

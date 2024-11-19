@@ -1,10 +1,14 @@
-import NewReportForm from '@/components/new-report/new-report-form'
 import { Button } from '@/components/ui/button'
 import UserType from '@/lib/entities/UserType'
 import CourseRepository from '@/lib/services/CourseRepository'
 import SessionManager from '@/lib/services/SessionManager'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+
+const NewReportForm = dynamic(() => import('@/components/new-report/new-report-form'), {
+    ssr: false
+})
 
 async function NewReportPage() {
     const { authorized, usertype, email } = await SessionManager.validateSession()

@@ -1,5 +1,7 @@
-import ReportsMap from '@/components/reports-map'
 import ReportRepository from '@/lib/services/ReportRepository'
+import dynamic from 'next/dynamic'
+
+const ReportsMap = dynamic(() => import('@/components/reports-map'), { ssr: false })
 
 async function MapPage() {
     const reports = await ReportRepository.listAccepted()

@@ -1,4 +1,5 @@
 'use client'
+import { LeafletProvider } from '@/components/leaflet-provider'
 import ReportTypeSelect from '@/components/new-report/report-type-select'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -19,25 +20,27 @@ function NewReportForm() {
     }
 
     return (
-        <form
-            action={action}
-            className='flex flex-col gap-8 items-center w-full'
-        >
-            <div className='max-w-sm flex flex-col gap-2 w-full'>
-                <Label htmlFor='description'>Descripción</Label>
-                <Input
-                    id='description'
-                    name='description'
-                    required
+        <LeafletProvider>
+            <form
+                action={action}
+                className='flex flex-col gap-8 items-center w-full'
+            >
+                <div className='max-w-sm flex flex-col gap-2 w-full'>
+                    <Label htmlFor='description'>Descripción</Label>
+                    <Input
+                        id='description'
+                        name='description'
+                        required
+                    />
+                </div>
+                <MapSelector
+                    position={position}
+                    onPositionChange={setPosition}
                 />
-            </div>
-            <MapSelector
-                position={position}
-                onPositionChange={setPosition}
-            />
-            <ReportTypeSelect />
-            <SubmitButton />
-        </form>
+                <ReportTypeSelect />
+                <SubmitButton />
+            </form>
+        </LeafletProvider>
     )
 }
 
