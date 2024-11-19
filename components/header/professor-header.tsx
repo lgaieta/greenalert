@@ -28,6 +28,13 @@ export default function ProfessorHeader() {
                         >
                             <Link href='/cursos/profesor'>Cursos</Link>
                         </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/reportes'>Reportes pendientes</Link>
+                        </Button>
                     </div>
                 </nav>
                 <LogoutButton />

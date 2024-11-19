@@ -4,7 +4,9 @@ import { logoutUserAction } from '@/lib/actions/logoutUserAction'
 function LogoutButton() {
     return (
         <form action={logoutUserAction}>
-            <Button variant={'destructive'}>Cerrar sesion</Button>
+            <Button className='bg-destructive/15 text-destructive hover:bg-destructive/25'>
+                Cerrar sesion
+            </Button>
         </form>
     )
 }

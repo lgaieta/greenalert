@@ -2,7 +2,7 @@ import ReportsMap from '@/components/reports-map'
 import ReportRepository from '@/lib/services/ReportRepository'
 
 async function MapPage() {
-    const reports = await ReportRepository.list()
+    const reports = await ReportRepository.listAccepted()
 
     return (
         <main className='flex gap-4 justify-center items-center h-full w-full py-12 lg:py-24'>
