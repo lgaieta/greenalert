@@ -2,6 +2,8 @@
 
 import SchoolRepository from '@/lib/services/SchoolRepository'
 import { RequestError } from '@/lib/utils'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export async function registerSchoolAction(formData: FormData) {
     const { cue, locality, name } = Object.fromEntries(formData.entries())
@@ -37,5 +39,6 @@ export async function registerSchoolAction(formData: FormData) {
         return ['Error al registrar el usuario.']
     }
 
-    return []
+    revalidatePath('/escuelas')
+    redirect('/escuelas')
 }
