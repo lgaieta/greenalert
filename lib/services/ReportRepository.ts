@@ -35,6 +35,18 @@ class ReportRepository {
         return await res.json()
     }
 
+    static async listTypes(): Promise<ExtendedReport[]> {
+        const res = await fetch(`${process.env.GREENALERT_API_URL}/report/types`)
+
+        if (!res.ok)
+            throw new RequestError(
+                'Error al obtener los tipos de reportes (http request).',
+                res.status
+            )
+
+        return await res.json()
+    }
+
     static async listAccepted(): Promise<ExtendedReport[]> {
         const res = await fetch(`${process.env.GREENALERT_API_URL}/report/accepted`)
 
