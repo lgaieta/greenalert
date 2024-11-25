@@ -7,11 +7,9 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select'
-import ReportRepository from '@/lib/services/ReportRepository'
+import type { ReportType } from '@/lib/entities/Report'
 
-async function ReportTypeSelect() {
-    const reportTypes = await ReportRepository.listTypes()
-
+function ReportTypeSelect(props: { types: ReportType[] }) {
     return (
         <Select name='reportType'>
             <SelectTrigger className='w-full max-w-sm'>
@@ -20,7 +18,7 @@ async function ReportTypeSelect() {
             <SelectContent className='z-[1000]'>
                 <SelectGroup>
                     <SelectLabel>Tipos de problema</SelectLabel>
-                    {reportTypes.map(type => (
+                    {props.types.map(type => (
                         <SelectItem
                             key={type.id}
                             value={String(type.id)}

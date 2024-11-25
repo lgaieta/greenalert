@@ -5,14 +5,24 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { registerReportAction } from '@/lib/actions/registerReportAction'
+import type { ReportType } from '@/lib/entities/Report'
 import { LatLngTuple } from 'leaflet'
 import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
-import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet'
+import dynamic from 'next/dynamic'
+import { Marker, useMapEvent } from 'react-leaflet'
+
+const MapContainer = dynamic(
+    () => import('react-leaflet').then(mod => mod.MapContainer),
+    { ssr: false }
+)
+const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), {
+    ssr: false
+})
 
 const DEFAULT_MAP_POSITION: LatLngTuple = [-34.607346526878345, -418.44560643938166]
 
-function NewReportForm() {
+function NewReportForm(props: { reportTypes: ReportType[] }) {
     const [position, setPosition] = useState(DEFAULT_MAP_POSITION)
 
     const action = async (formData: FormData) => {
@@ -37,7 +47,7 @@ function NewReportForm() {
                     position={position}
                     onPositionChange={setPosition}
                 />
-                <ReportTypeSelect />
+                <ReportTypeSelect types={props.reportTypes} />
                 <SubmitButton />
             </form>
         </LeafletProvider>
@@ -49,6 +59,8 @@ function MapSelector(props: {
     // eslint-disable-next-line no-unused-vars
     onPositionChange: (latlng: LatLngTuple) => void
 }) {
+    console.log('rendered map')
+
     return (
         <div className='flex flex-col items-center gap-2 w-full'>
             <Label className='max-w-sm w-full'>Elegir ubicación</Label>

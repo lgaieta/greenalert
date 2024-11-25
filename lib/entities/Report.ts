@@ -9,6 +9,8 @@ interface Report {
     description: string
 }
 
+export default Report
+
 export interface ExtendedReport {
     id: number
     email: string
@@ -24,4 +26,7 @@ export interface ExtendedReport {
     description: string
 }
 
-export default Report
+export interface ReportType {
+    id: number
+    name: string
+}
