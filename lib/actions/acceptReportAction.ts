@@ -25,6 +25,7 @@ export async function acceptReportAction(report: Report) {
         }
     }
 
+    revalidatePath('/mapa')
     revalidatePath('/reportes')
     const random = Math.random()
     redirect(`/reportes?${random}`)
