@@ -26,6 +26,13 @@ export default function ProfessorHeader() {
                             variant={'link'}
                             size={'sm'}
                         >
+                            <Link href='/estadisticas'>Estadísticas</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
                             <Link href='/cursos/profesor'>Cursos</Link>
                         </Button>
                         <Button

@@ -29,6 +29,13 @@ export default async function StudentHeader(props: { email: string }) {
                             variant={'link'}
                             size={'sm'}
                         >
+                            <Link href='/estadisticas'>Estadísticas</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
                             <Link href='/nuevo-problema'>Nuevo problema</Link>
                         </Button>
                         {course && (

@@ -26,6 +26,13 @@ export default function AdminHeader() {
                             variant={'link'}
                             size={'sm'}
                         >
+                            <Link href='/estadisticas'>Estadísticas</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
                             <Link href='/directores'>Directores</Link>
                         </Button>
                         <Button

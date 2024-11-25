@@ -26,6 +26,13 @@ export default function DirectorHeader() {
                             variant={'link'}
                             size={'sm'}
                         >
+                            <Link href='/estadisticas'>Estadísticas</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
                             <Link href='/profesores'>Profesores</Link>
                         </Button>
                     </div>

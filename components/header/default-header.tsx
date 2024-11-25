@@ -20,6 +20,13 @@ export default function DefaultHeader() {
                         >
                             <Link href='/mapa'>Mapa</Link>
                         </Button>
+                        <Button
+                            asChild
+                            variant={'link'}
+                            size={'sm'}
+                        >
+                            <Link href='/estadisticas'>Estadísticas</Link>
+                        </Button>
                     </div>
                 </div>
                 <div className='flex items-center space-x-4'>

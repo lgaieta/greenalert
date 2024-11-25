@@ -1,4 +1,8 @@
-import Report, { type ExtendedReport, type ReportType } from '@/lib/entities/Report'
+import Report, {
+    type ExtendedReport,
+    type ReportType,
+    type ReportTypeStatistic
+} from '@/lib/entities/Report'
 import type User from '@/lib/entities/User'
 import { RequestError } from '@/lib/utils'
 import { cookies } from 'next/headers'
@@ -77,6 +81,20 @@ class ReportRepository {
 
         if (!res.ok)
             throw new RequestError('Error al salir del curso (http request).', res.status)
+
+        return await res.json()
+    }
+
+    static async getStatisticsByReportType(): Promise<ReportTypeStatistic[]> {
+        const res = await fetch(
+            `${process.env.GREENALERT_API_URL}/report/statistics/types`
+        )
+
+        if (!res.ok)
+            throw new RequestError(
+                'Error al obtener las estadísticas de tipos de reportes (http request).',
+                res.status
+            )
 
         return await res.json()
     }

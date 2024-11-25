@@ -1,4 +1,4 @@
--   Load report types from db - IN PROGRESS
--   Save report type in db
--   Show charts about report types
+-   Load report types from db - DONE
+-   Save report type in db - DONE
+-   Show charts about report types DONE
 -   Load locality from db

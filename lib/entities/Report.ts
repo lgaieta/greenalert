@@ -30,3 +30,7 @@ export interface ReportType {
     id: number
     name: string
 }
+
+export interface ReportTypeStatistic extends ReportType {
+    amount: number
+}
