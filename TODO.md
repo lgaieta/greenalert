@@ -2,3 +2,5 @@
 -   Save report type in db - DONE
 -   Show charts about report types DONE
 -   Load locality from db
+-   Show student his reports
+-   Send message when report is accepted or rejected

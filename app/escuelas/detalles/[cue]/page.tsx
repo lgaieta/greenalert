@@ -1,7 +1,9 @@
 import DirectorSelector from '@/components/director-selector'
 import { Card, CardContent } from '@/components/ui/card'
+import type Locality from '@/lib/entities/Locality'
 import type School from '@/lib/entities/School'
 import UserType from '@/lib/entities/UserType'
+import LocalityRepository from '@/lib/services/LocalityRepository'
 import SchoolRepository from '@/lib/services/SchoolRepository'
 import SessionManager from '@/lib/services/SessionManager'
 import UserRepository from '@/lib/services/UserRepository'
@@ -23,6 +25,7 @@ async function SchoolDetailsPage({ params }: { params: { cue: string } }) {
                 <Card>
                     <CardContent className='flex flex-col p-8 gap-4'>
                         <p>CUE: {school.cue}</p>
+                        <SchoolLocality id={Number(school.locality)} />
                         <SchoolDirector cue={school.cue} />
                         <DirectorSelector cue={school.cue} />
                     </CardContent>
@@ -35,6 +38,11 @@ async function SchoolDetailsPage({ params }: { params: { cue: string } }) {
 async function SchoolDirector(props: { cue: School['cue'] }) {
     const director = await UserRepository.getSchoolDirector(props.cue)
     return <p>Director: {director?.email || 'No hay un director asignado'}</p>
+}
+async function SchoolLocality(props: { id: Locality['id'] }) {
+    const locality = await LocalityRepository.getById(props.id)
+    console.log(locality)
+    return <p>Localidad: {locality?.name}</p>
 }
 
 export default SchoolDetailsPage
